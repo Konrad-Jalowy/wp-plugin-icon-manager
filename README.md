@@ -1,7 +1,10 @@
 # wp-plugin-icon-manager
 Simple icon manager for my wordpress project
 
-I needed sth like that in my wordpress project. new to wordpress plugins. Say you want to display <i class="bi bi-dash-circle"></i>. You need to do 2 things:
+I needed sth like that in my wordpress project. new to wordpress plugins. Say you want to display 
+```<i class="bi bi-dash-circle"></i>
+```html
+You need to do 2 things
 ```
 set_icon("circle", "bi bi-dash-circle");
     echo get_icon("circle");
