@@ -3,7 +3,7 @@
 Plugin Name: Icon Manager
 Description: Plugin to manage icons.
 Version: 1.0
-Author: KJ
+Author: Your Name
 */
 
 // Make sure this file is called directly
@@ -61,6 +61,12 @@ function get_icon($name) {
     }
 }
 
+if (!function_exists('icon')) {
+    function icon($name) {
+        echo get_icon($name);
+    }
+}
+
 function set_icon($name, $value) {
     global $wpdb;
     $table_name = $wpdb->prefix . 'icons';
@@ -101,6 +107,7 @@ function icon_manager_page_content() {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Value</th>
+                  
                 </tr>
             </thead>
             <tbody>
@@ -109,6 +116,7 @@ function icon_manager_page_content() {
                         <td><?php echo esc_html($icon['id']); ?></td>
                         <td><?php echo esc_html($icon['name']); ?></td>
                         <td><?php echo esc_html($icon['value']); ?></td>
+                        
                     </tr>
                 <?php endforeach; ?>
             </tbody>
