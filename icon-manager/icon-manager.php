@@ -70,13 +70,27 @@ if (!function_exists('icon')) {
 function set_icon($name, $value) {
     global $wpdb;
     $table_name = $wpdb->prefix . 'icons';
-    $wpdb->insert(
-        $table_name,
-        array(
-            'name'  => $name,
-            'value' => $value,
-        )
-    );
+
+    // Check if the icon already exists
+    $existing_icon = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE name = %s", $name), ARRAY_A);
+
+    if ($existing_icon) {
+        // Icon already exists, update its value
+        $wpdb->update(
+            $table_name,
+            array('value' => $value),
+            array('id' => $existing_icon['id'])
+        );
+    } else {
+        // Icon doesn't exist, insert a new row
+        $wpdb->insert(
+            $table_name,
+            array(
+                'name'  => $name,
+                'value' => $value,
+            )
+        );
+    }
 }
 
 function icon_manager_menu_page() {
